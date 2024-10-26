@@ -1,0 +1,5 @@
+spring.application.name:ReservasServices
+spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=mi_base_datos
+spring.datasource.username=usuario
+spring.datasource.password=contraseña
+spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
