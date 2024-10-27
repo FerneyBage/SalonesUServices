@@ -1,5 +1,12 @@
-spring.application.name:ReservasServices
-spring.datasource.url=jdbc:sqlserver://localhost:1433;databaseName=mi_base_datos
-spring.datasource.username=usuario
-spring.datasource.password=contraseña
-spring.datasource.driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver
+spring:
+  application:
+    name: ReservasServices
+  datasource:
+    url: jdbc:sqlserver://assu.database.windows.net:1433;salonesubd=dbo
+    username: AliAdmin
+    password: ZmXiT87S>\2("'yr
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
