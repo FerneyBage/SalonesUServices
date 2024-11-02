@@ -2,11 +2,10 @@ spring:
   application:
     name: ReservasServices
   datasource:
-    url: jdbc:sqlserver://assu.database.windows.net:1433;salonesubd=dbo
+    url: jdbc:sqlserver://assu.database.windows.net:1433;database=salonesubd;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
     username: AliAdmin
-    password: ZmXiT87S>\2("'yr
+    password: "ZmXiT87S>\\2(\"'yr"
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: update
-
