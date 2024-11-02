@@ -2,6 +2,7 @@ package Saloneu.ReservasServices.Services.implementation;
 
 import Saloneu.ReservasServices.Models.entities.Edificio;
 import Saloneu.ReservasServices.Repositories.IEdificioRepository;
+import Saloneu.ReservasServices.Services.contract.IEdificioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EdificioService implements Saloneu.ReservasServices.Services.contract.IEdificioService {
+public class EdificioService implements IEdificioService {
 
     @Autowired
     private IEdificioRepository EdificioRepository;
