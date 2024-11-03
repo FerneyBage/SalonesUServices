@@ -24,7 +24,7 @@ public class ReservaService implements IReservaService {
     private final IDisponibilidadSaloneRepository disponibilidadSalonRepository;
     private final IEstadoReservaRepository estadoReservaRepository;
 
-    @Value("${id_estado_pending}")
+    @Value("${reserva.estado.pending}")
     private Integer idEstadoPending;
 
     @Autowired
@@ -63,9 +63,14 @@ public class ReservaService implements IReservaService {
         LocalDateTime inicioDelDia = fechaNuevaReserva.atStartOfDay(); // 00:00 del día de la reserva
         LocalDateTime finDelDia = fechaNuevaReserva.atTime(23, 59); // 23:59 del día de la reserva
 
-        if (disponibilidad.getHoraInicio().isAfter(LocalTime.from(fechaNuevaReserva))) {
-            throw new RuntimeException("esta reserva para este dia ya no esta disponible");
+        LocalDateTime inicioDisponibilidad = fechaNuevaReserva.atTime(disponibilidad.getHoraInicio());
+        LocalDateTime fechaHoraActual = LocalDateTime.now();
+
+        if (inicioDisponibilidad.isBefore(fechaHoraActual)) {
+            throw new RuntimeException("Esta reserva para este día ya no está disponible");
         }
+
+
 
         // Verificar si alguna reserva existente en estado "pending" cae dentro de los límites del día completo
         boolean reservaPendienteExistente = reservaRepository.findAll().stream()
