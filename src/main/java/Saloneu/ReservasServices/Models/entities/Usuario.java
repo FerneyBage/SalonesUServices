@@ -43,6 +43,11 @@ public class Usuario {
     @JoinColumn(name = "id_rol")
     private Role idRol;
 
+    @Size(max = 100)
+    @NotNull
+    @Column(name = "telefono", nullable = false, length = 100)
+    private String telefono;
+
     @OneToMany(mappedBy = "idUsuario")
     private Set<Notificacione> notificaciones = new LinkedHashSet<>();
 
