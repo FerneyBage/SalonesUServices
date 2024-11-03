@@ -13,6 +13,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Optional;
 
 @Service
 public class ReservaService implements IReservaService {
@@ -95,5 +96,21 @@ public class ReservaService implements IReservaService {
     @Override
     public List<Reserva> getReservasByUsuarioId(Integer usuarioId) {
         return reservaRepository.findByIdUsuarioId(usuarioId);
+    }
+
+    public Reserva actualizarEstadoReserva(Integer reservaId, Integer estadoId) {
+        // Verificar si el estado existe
+        Optional<EstadoReserva> estadoReservaOptional = estadoReservaRepository.findById(estadoId);
+        if (!estadoReservaOptional.isPresent()) {
+            throw new IllegalArgumentException("El estado especificado no existe");
+        }
+
+        // Verificar si la reserva existe
+        Reserva reserva = reservaRepository.findById(reservaId)
+                .orElseThrow(() -> new IllegalArgumentException("La reserva especificada no existe"));
+
+        // Actualizar el estado de la reserva
+        reserva.setIdEstado(estadoReservaOptional.get());
+        return reservaRepository.save(reserva);
     }
 }

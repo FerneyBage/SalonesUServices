@@ -8,4 +8,6 @@ public interface IReservaService {
     Reserva crearReserva(Reserva reserva);
 
     List<Reserva> getReservasByUsuarioId(Integer usuarioId);
+
+    Reserva actualizarEstadoReserva(Integer reservaId, Integer estadoId);
 }

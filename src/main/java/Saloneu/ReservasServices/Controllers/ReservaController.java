@@ -1,6 +1,7 @@
 package Saloneu.ReservasServices.Controllers;
 
 import Saloneu.ReservasServices.Models.Dtos.EntitiesDto.ReservaDto.ReservaCreateDTO;
+import Saloneu.ReservasServices.Models.Dtos.EntitiesDto.ReservaDto.ReservaEstadoUpdateDTO;
 import Saloneu.ReservasServices.Models.Dtos.EntitiesDto.ReservaDto.ReservaListDTO;
 import Saloneu.ReservasServices.Models.Dtos.MapperDto.ReservaMapper;
 import Saloneu.ReservasServices.Models.entities.Reserva;
@@ -87,5 +88,27 @@ public class ReservaController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(reservaListDTOs);
+    }
+
+    @Operation(summary = "Actualizar el estado de una reserva", description = "Modifica el estado de una reserva existente si el estado especificado existe.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Estado de la reserva actualizado exitosamente"),
+            @ApiResponse(responseCode = "400", description = "Datos inválidos o el estado/reserva no existen")
+    })
+    @PutMapping("/actualizar-estado")
+    public ResponseEntity<ReservaListDTO> actualizarEstadoReserva(@RequestBody ReservaEstadoUpdateDTO reservaEstadoUpdateDTO) {
+        try {
+            // Actualiza el estado de la reserva
+            Reserva reservaActualizada = reservaService.actualizarEstadoReserva(
+                    reservaEstadoUpdateDTO.getReservaId(),
+                    reservaEstadoUpdateDTO.getEstadoId());
+
+            // Mapea la entidad Reserva actualizada a ReservaListDTO usando ReservaMapper.INSTANCE
+            ReservaListDTO reservaListDTO = ReservaMapper.INSTANCE.toListDTO(reservaActualizada);
+
+            return ResponseEntity.ok(reservaListDTO);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
     }
 }
