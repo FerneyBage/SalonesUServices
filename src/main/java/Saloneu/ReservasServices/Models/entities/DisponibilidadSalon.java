@@ -6,14 +6,16 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "Disponibilidad_Salones")
-public class DisponibilidadSalone {
+public class DisponibilidadSalon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_disponibilidad", nullable = false)
@@ -24,10 +26,6 @@ public class DisponibilidadSalone {
     private Salon idSalon;
 
     @NotNull
-    @Column(name = "fecha", nullable = false)
-    private LocalDate fecha;
-
-    @NotNull
     @Column(name = "hora_inicio", nullable = false)
     private LocalTime horaInicio;
 
@@ -36,7 +34,10 @@ public class DisponibilidadSalone {
     private LocalTime horaFin;
 
     @ColumnDefault("1")
-    @Column(name = "disponibilidad")
-    private Boolean disponibilidad;
+    @Column(name = "visibilidad")
+    private Boolean visibilidad;
+
+    @OneToMany(mappedBy = "idDisponibilidad")
+    private Set<Reserva> reservas = new LinkedHashSet<>();
 
 }

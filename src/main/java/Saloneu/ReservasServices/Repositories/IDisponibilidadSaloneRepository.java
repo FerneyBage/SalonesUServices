@@ -1,7 +1,7 @@
 package Saloneu.ReservasServices.Repositories;
 
-import Saloneu.ReservasServices.Models.entities.DisponibilidadSalone;
+import Saloneu.ReservasServices.Models.entities.DisponibilidadSalon;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface IDisponibilidadSaloneRepository extends JpaRepository<DisponibilidadSalone, Integer> {
+public interface IDisponibilidadSaloneRepository extends JpaRepository<DisponibilidadSalon, Integer> {
 }

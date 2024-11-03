@@ -45,7 +45,7 @@ public class Salon {
     private Edificio Edificio;
 
     @OneToMany(mappedBy = "idSalon")
-    private Set<DisponibilidadSalone> disponibilidadSalones = new LinkedHashSet<>();
+    private Set<DisponibilidadSalon> disponibilidadSalones = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "idSalon")
     private Set<Reserva> reservas = new LinkedHashSet<>();

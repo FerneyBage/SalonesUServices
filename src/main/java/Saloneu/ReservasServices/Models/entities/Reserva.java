@@ -2,7 +2,6 @@ package Saloneu.ReservasServices.Models.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
@@ -43,14 +42,17 @@ public class Reserva {
     @Column(name = "hora_fin", nullable = false)
     private LocalTime horaFin;
 
-    @Size(max = 10)
-    @NotNull
-    @Column(name = "estado", nullable = false, length = 10)
-    private String estado;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_estado")
+    private EstadoReserva idEstado;
 
     @ColumnDefault("getdate()")
     @Column(name = "fecha_creacion")
     private Instant fechaCreacion;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_disponibilidad")
+    private DisponibilidadSalon idDisponibilidad;
 
     @OneToMany(mappedBy = "idReserva")
     private Set<Notificacione> notificaciones = new LinkedHashSet<>();
