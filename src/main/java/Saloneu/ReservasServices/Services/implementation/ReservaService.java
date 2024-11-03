@@ -56,10 +56,16 @@ public class ReservaService implements IReservaService {
         DisponibilidadSalon disponibilidad = disponibilidadSalonRepository.findById(reserva.getIdDisponibilidad().getId())
                 .orElseThrow(() -> new RuntimeException("La disponibilidad con ID " + reserva.getIdDisponibilidad().getId() + " no existe."));
 
+
+
         // Definir los límites de fecha y hora para la validación
         LocalDate fechaNuevaReserva = reserva.getFecha().toLocalDate();
         LocalDateTime inicioDelDia = fechaNuevaReserva.atStartOfDay(); // 00:00 del día de la reserva
         LocalDateTime finDelDia = fechaNuevaReserva.atTime(23, 59); // 23:59 del día de la reserva
+
+        if (disponibilidad.getHoraInicio().isAfter(LocalTime.from(fechaNuevaReserva))) {
+            throw new RuntimeException("esta reserva para este dia ya no esta disponible");
+        }
 
         // Verificar si alguna reserva existente en estado "pending" cae dentro de los límites del día completo
         boolean reservaPendienteExistente = reservaRepository.findAll().stream()
