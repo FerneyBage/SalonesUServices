@@ -21,7 +21,7 @@ public class DisponibilidadSalone {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_salon")
-    private Salone idSalon;
+    private Salon idSalon;
 
     @NotNull
     @Column(name = "fecha", nullable = false)

@@ -24,7 +24,7 @@ public class TiposSalon {
     @Column(name = "nombre_tipo", nullable = false, length = 100)
     private String nombreTipo;
 
-    @OneToMany(mappedBy = "idTipoSalon")
-    private Set<Salone> salones = new LinkedHashSet<>();
+    @OneToMany(mappedBy = "TipoSalon")
+    private Set<Salon> salones = new LinkedHashSet<>();
 
 }

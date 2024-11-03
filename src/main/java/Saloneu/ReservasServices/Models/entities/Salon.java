@@ -13,7 +13,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name = "Salones")
-public class Salone {
+public class Salon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_salon", nullable = false)
@@ -38,11 +38,11 @@ public class Salone {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_tipo_salon")
-    private TiposSalon idTipoSalon;
+    private TiposSalon TipoSalon;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_edificio")
-    private Edificio idEdificio;
+    private Edificio Edificio;
 
     @OneToMany(mappedBy = "idSalon")
     private Set<DisponibilidadSalone> disponibilidadSalones = new LinkedHashSet<>();
